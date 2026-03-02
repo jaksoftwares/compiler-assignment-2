@@ -1,0 +1,14 @@
+assignment2: assignment2.tab.o lex.yy.o
+	gcc -lfl -o assignment2 assignment2.tab.o lex.yy.o
+
+assignment2.tab.o: assignment2.tab.c assignment2.tab.h
+	gcc -c assignment2.tab.c -w
+
+lex.yy.o: lex.yy.c assignment2.tab.h
+	gcc -c lex.yy.c
+
+lex.yy.c: assignment2.l
+	flex assignment2.l
+
+assignment2.tab.c: assignment2.y
+	bison -d assignment2.y

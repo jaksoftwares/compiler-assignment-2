@@ -1,0 +1,14 @@
+calculator2: calculator2.tab.o lex.yy.o
+	gcc -o calculator2 calculator2.tab.o lex.yy.o -lfl
+
+calculator2.tab.o: calculator2.tab.c calculator2.tab.h
+	gcc -c calculator2.tab.c -w
+
+lex.yy.o: lex.yy.c calculator2.tab.h
+	gcc -c lex.yy.c
+
+lex.yy.c: calculator2.l
+	flex calculator2.l
+
+calculator2.tab.c: calculator2.y
+	bison -d calculator2.y
